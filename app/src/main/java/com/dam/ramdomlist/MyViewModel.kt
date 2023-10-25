@@ -11,6 +11,7 @@ class RandomNumberViewModel : ViewModel() {
     var text by mutableStateOf("")
     var randomNumber by mutableStateOf(0)
     val numberList = mutableListOf<Int>()
+    var round = mutableStateOf(1)
 
     // Función para generar un número aleatorio
     fun generateRandomNumber() {
@@ -20,5 +21,13 @@ class RandomNumberViewModel : ViewModel() {
     fun addRandomNumber() {
         val randomNumber = (1..4).random()
         numberList.add(randomNumber)
+    }
+    fun startGame() {
+        numberList.clear()
+        round.value = 1
+    }
+
+    fun startNextRound() {
+        round.value++
     }
 }
