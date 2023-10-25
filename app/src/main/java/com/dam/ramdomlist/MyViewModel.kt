@@ -6,19 +6,20 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import kotlin.random.Random
 
-class RandomNumberViewModel : ViewModel() {
-    // Estado del texto y número aleatorio
-    var text by mutableStateOf("")
-    var randomNumber by mutableStateOf(0)
-    val numberList = mutableListOf<Int>()
+data class RandomNumberData(
+    val randomNumber: Int,
+    val numberList: List<Int>
+)
 
-    // Función para generar un número aleatorio
+class RandomNumberViewModel : ViewModel() {
+    var text by mutableStateOf("")
+    var data by mutableStateOf(RandomNumberData(0, emptyList()))
+
     fun generateRandomNumber() {
         val max = text.toIntOrNull() ?: 10
-        randomNumber = Random.nextInt(max + 1)
-    }
-    fun addRandomNumber() {
-        val randomNumber = (1..4).random()
-        numberList.add(randomNumber)
+        val newRandomNumber = Random.nextInt(max + 1)
+        val newNumberList = data.numberList.toMutableList()
+        newNumberList.add((1..4).random())
+        data = RandomNumberData(newRandomNumber, newNumberList)
     }
 }
