@@ -66,6 +66,7 @@ fun RandomNumberUI(viewModel: RandomNumberViewModel) {
         Button(
             onClick = {
                 viewModel.generateRandomNumber()
+                viewModel.addRandomNumber()
             },
             modifier = Modifier.padding(16.dp)
         ) {
@@ -76,6 +77,10 @@ fun RandomNumberUI(viewModel: RandomNumberViewModel) {
 
         Text(
             text = "Número aleatorio: ${viewModel.randomNumber}",
+            style = MaterialTheme.typography.bodyMedium
+        )
+        Text(
+            text = "Números aleatorios: ${viewModel.numberList.joinToString(", ")}",
             style = MaterialTheme.typography.bodyMedium
         )
     }
